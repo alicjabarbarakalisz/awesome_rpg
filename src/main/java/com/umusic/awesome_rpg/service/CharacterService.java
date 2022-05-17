@@ -15,9 +15,10 @@ public class CharacterService {
     @Autowired
     private CharacterDao characterDao;
 
-    public void createCharacter(String name){
+    public String createCharacter(String name){
         RPGCharacter character = new RPGCharacter(name);
         characterDao.createCharacter(character.getName(), character.getHealth(),character.isAlive(), character.getLevel());
+        return "Character " + name + " created";
     }
 
     public String lookAround(String name){
@@ -86,7 +87,7 @@ public class CharacterService {
         characterDao.updateCharHealth(defenderName, newHealth, newHealth > 0);
 
         if (newHealth > 0) {
-            info = "Character " + attackerName + " hit  " + defenderName + " for " + attackDamage + " damage. " + defenderName + " now has " + newHealth + " HP";
+            info = "Character " + attackerName + " hit " + defenderName + " for " + attackDamage + " damage. " + defenderName + " now has " + newHealth + " HP";
         } else {
             info = "Character " + defenderName + " IS DEAD!!!!!!!";
         }

@@ -18,9 +18,8 @@ public class CharacterController {
     private CharacterService characterService;
 
     @PostMapping("/create/{name}")
-    public ResponseEntity<HttpEntity> createCharacter(@PathVariable String name){
-        characterService.createCharacter(name);
-        return null;
+    public ResponseEntity<String> createCharacter(@PathVariable String name){
+        return new ResponseEntity<String>(characterService.createCharacter(name), HttpStatus.OK);
     }
 
     @PostMapping("/lookAround/{name}")
