@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -29,10 +30,9 @@ public class CharacterController {
     }
 
 
-    @PostMapping("/heal")
-    public ResponseEntity<String> healCharacter(String characterName, int medication){
-        characterService.healCharacter(characterName, medication);
-        return null;
+    @PostMapping("/heal/{name}/{medication}")
+    public ResponseEntity<String> healCharacter(@RequestParam(name = "name") String name, @RequestParam (name="medication") int medication){
+        return new ResponseEntity<String>(characterService.healCharacter(name,medication), HttpStatus.OK);
     }
 
 }

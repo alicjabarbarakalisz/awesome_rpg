@@ -18,15 +18,17 @@ public class CharacterService {
         characterDao.createCharacter(character.getName(), character.getHealth(),character.isAlive(), character.getLevel());
     }
 
-    public RPGCharacter healCharacter(String name, int medication){
+    public String healCharacter(String name, int medication){
         RPGCharacter character = characterDao.getCharacter(name);
         Integer newHealth = character.getHealth() + medication;
         if(!character.isAlive() && newHealth > 999){
-            return character;
+            return "Character must be alive and it's health can't be greater than 1000";
         }
         characterDao.updateCharHealth(name, newHealth);
 
-        return character;
+        String info = "Character " + name + " is healthier. "+ name + " now has " + newHealth + " HP";
+
+        return info;
     }
 
     public String attackCharacter(String name){
@@ -38,6 +40,7 @@ public class CharacterService {
         characterDao.updateCharHealth(name, newHealth);
 
         String info = "Character " + name + " hit for " + attackDamage + " damage. " + name + " now has " + newHealth + " HP";
+        return  info;
     }
 
 
