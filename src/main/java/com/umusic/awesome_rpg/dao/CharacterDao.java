@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public class CharacterDao {
 
@@ -31,6 +33,22 @@ public class CharacterDao {
     public void updateCharHealth(String name, Integer newHealth, boolean alive){
         jdbcTemplate.update("UPDATE rpg.rpg_character set health = ?, alive = ? WHERE name = ?",
                 newHealth, alive, name
+        );
+    }
+
+    public List<RPGCharacter> getAllCharacters(){
+
+        String sql = "SELECT * FROM rpg.rpg_character";
+
+        return jdbcTemplate.query(
+                sql,
+                (rs, rowNum) ->
+                        new RPGCharacter(
+                                rs.getString("name"),
+                                rs.getInt("health"),
+                                rs.getInt("level"),
+                                rs.getBoolean("alive")
+                        )
         );
     }
 }

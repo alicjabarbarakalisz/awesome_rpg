@@ -23,6 +23,12 @@ public class CharacterController {
         return null;
     }
 
+    @PostMapping("/lookAround/{name}")
+    public ResponseEntity<String> lookAround(@PathVariable String name){
+        return new ResponseEntity<String>(characterService.lookAround(name), HttpStatus.OK);
+    }
+
+
 
     @PostMapping("/attack/{attackerName}/{defenderName}")
     public ResponseEntity<String> attack(@PathVariable String attackerName, @PathVariable String defenderName){
