@@ -40,7 +40,7 @@ public class CharacterService {
                 .map(RPGCharacter::getName)
                 .toList();
 
-        if (deadCharNames != null) {
+        if (!deadCharNames.isEmpty()) {
             info = info + " Besides you lies the 'fainted' body of " + deadCharNames;
         }
         return info;
