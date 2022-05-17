@@ -4,6 +4,7 @@ import com.umusic.awesome_rpg.model.RPGCharacter;
 import com.umusic.awesome_rpg.service.CharacterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,14 +24,13 @@ public class CharacterController {
 
 
     @PostMapping("/attack/{name}")
-    public ResponseEntity<HttpEntity> attack(@PathVariable String name){
-       characterService.attackCharacter(name);
-        return null;
+    public ResponseEntity<String> attack(@PathVariable String name){
+       return new ResponseEntity<String>(characterService.attackCharacter(name), HttpStatus.OK);
     }
 
 
     @PostMapping("/heal")
-    public ResponseEntity<HttpEntity> healCharacter(String characterName, int medication){
+    public ResponseEntity<String> healCharacter(String characterName, int medication){
         characterService.healCharacter(characterName, medication);
         return null;
     }

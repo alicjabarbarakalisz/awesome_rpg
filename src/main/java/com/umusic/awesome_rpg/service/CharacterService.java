@@ -24,17 +24,20 @@ public class CharacterService {
         if(!character.isAlive() && newHealth > 999){
             return character;
         }
-        character.setHealth(newHealth);
-        characterDao.updateCharacter(character);
+        characterDao.updateCharHealth(name, newHealth);
 
         return character;
     }
 
-    public void attackCharacter(String name){
+    public String attackCharacter(String name){
         Integer attackDamage = ThreadLocalRandom.current().nextInt(100, 200 + 1);
-        characterDao.get
+        RPGCharacter character = characterDao.getCharacter(name);
 
-        characterDao.attack(name, damage);
+        Integer newHealth = character.getHealth() - attackDamage;
+
+        characterDao.updateCharHealth(name, newHealth);
+
+        String info = "Character " + name + " hit for " + attackDamage + " damage. " + name + " now has " + newHealth + " HP";
     }
 
 

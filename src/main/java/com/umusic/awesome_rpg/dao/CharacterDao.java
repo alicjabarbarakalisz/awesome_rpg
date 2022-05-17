@@ -17,10 +17,6 @@ public class CharacterDao {
         );
     }
 
-    public void updateCharacter(RPGCharacter character){
-        jdbcTemplate.execute("UPDATE CHARACTER SET HEALTH = " + character.getHealth() + " where id = " + character.getId());
-    }
-
     public RPGCharacter getCharacter(String name){
         return jdbcTemplate.queryForObject("SLECT * FROM rpg.rpg_character WHERE name = :?", new Object[]{name}, (rs, rowNum) ->
                 new RPGCharacter(
@@ -31,4 +27,8 @@ public class CharacterDao {
                 ));
     }
 
+
+    public void updateCharHealth(String name, Integer newHealth){
+        jdbcTemplate.execute("UPDATE CHARACTER SET HEALTH = " + newHealth + " where name = " + name);
+    }
 }
