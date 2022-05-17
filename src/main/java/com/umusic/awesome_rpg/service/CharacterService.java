@@ -38,6 +38,7 @@ public class CharacterService {
         characterDao.updateCharHealth(name, newHealth);
 
         String info = "Character " + name + " hit for " + attackDamage + " damage. " + name + " now has " + newHealth + " HP";
+        return info;
     }
 
 
