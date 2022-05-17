@@ -6,7 +6,7 @@ services:
     image: mysql:5.7.24
     restart: always
     volumes:
-      - ./startup.sql
+      - /etc/startup.sql
     environment:
       MYSQL_ROOT_PASSWORD: 01Music
       MYSQL_DATABASE: rpg
