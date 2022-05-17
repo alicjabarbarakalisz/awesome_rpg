@@ -11,8 +11,7 @@ public class CharacterDao {
     private JdbcTemplate jdbcTemplate;
 
     public void createCharacter(String name, Integer health, boolean alive, Integer level){
-        jdbcTemplate.update(
-                "INSERT INTO rpg.rpg_character (name, health, alive, level) VALUES (?, ?)",
+        jdbcTemplate.update("INSERT INTO rpg.rpg_character (name, health, alive, level) VALUES (?, ?, ?, ?)",
                 name, health, alive, level
         );
     }

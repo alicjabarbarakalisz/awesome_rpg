@@ -13,7 +13,7 @@ public class CharacterService {
 
     public void createCharacter(){
         Character character = new Character("Luke");
-
+        characterDao.createCharacter(character.getName(), character.getHealth(),character.isAlive(), character.getLevel());
     }
 
 }
