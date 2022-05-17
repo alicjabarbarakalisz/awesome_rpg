@@ -51,4 +51,36 @@ public class CharacterDao {
                         )
         );
     }
+
+    public List<RPGCharacter> getAllAliveNPCCharacters(String name){
+
+        String sql = "SELECT * FROM rpg.rpg_character WHERE name != ? AND alive = true";
+
+        return jdbcTemplate.query(
+                sql, new Object[]{name},
+                (rs, rowNum) ->
+                        new RPGCharacter(
+                                rs.getString("name"),
+                                rs.getInt("health"),
+                                rs.getInt("level"),
+                                rs.getBoolean("alive")
+                        )
+        );
+    }
+
+    public List<RPGCharacter> getAllDeadChars(){
+
+        String sql = "SELECT * FROM rpg.rpg_character WHERE alive = false";
+
+        return jdbcTemplate.query(
+                sql,
+                (rs, rowNum) ->
+                        new RPGCharacter(
+                                rs.getString("name"),
+                                rs.getInt("health"),
+                                rs.getInt("level"),
+                                rs.getBoolean("alive")
+                        )
+        );
+    }
 }

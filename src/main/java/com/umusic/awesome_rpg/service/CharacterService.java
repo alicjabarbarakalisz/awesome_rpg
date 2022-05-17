@@ -22,28 +22,26 @@ public class CharacterService {
     }
 
     public String lookAround(String name){
-        RPGCharacter character = characterDao.getCharacter(name);
 
-        List<RPGCharacter> characters = characterDao.getAllCharacters();
+        List<RPGCharacter> aliveChars = characterDao.getAllAliveNPCCharacters(name);
 
-        List<String> filteredCharList = characters
+        List<String> aliveNpcChars = aliveChars
                 .stream()
-                .filter(e -> !e.getName().equals(character.getName()) && e.isAlive())
                 .map(RPGCharacter::getName)
                 .toList();
 
         String info = "You, " + name + ", are a weary traveller in a local tavern, stopping for some well needed rest. " +
-                "Around you is an assortment of shady looking characters looking for a fight, including " + filteredCharList + "." ;
+                "Around you is an assortment of shady looking characters looking for a fight, including " + aliveNpcChars + "." ;
 
+        List<RPGCharacter> deadChars = characterDao.getAllDeadChars();
 
-        List<String> deadChars = characters
+        List<String> deadCharNames = deadChars
                 .stream()
-                .filter(e -> !e.isAlive())
                 .map(RPGCharacter::getName)
                 .toList();
 
-        if (deadChars != null) {
-            info = info + " Besides you lies the 'fainted' body of " + deadChars;
+        if (!deadCharNames.isEmpty()) {
+            info = info + " Besides you lies the 'fainted' body of " + deadCharNames;
         }
         return info;
     }
