@@ -11,8 +11,10 @@ public class CharacterDao {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
-    public void saveCharacter(Character character){
-        jdbcTemplate.execute("INSERT INTO ");
+    public void createCharacter(String name, Integer health, boolean alive, Integer level){
+        jdbcTemplate.update("INSERT INTO rpg.rpg_character (name, health, alive, level) VALUES (?, ?, ?, ?)",
+                name, health, alive, level
+        );
     }
 
     public void updateCharacter(RPGCharacter character){

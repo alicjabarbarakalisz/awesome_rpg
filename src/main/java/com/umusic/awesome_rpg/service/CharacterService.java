@@ -11,10 +11,11 @@ public class CharacterService {
     @Autowired
     private CharacterDao characterDao;
 
-    public void createCharacter(){
-        RPGCharacter character = new RPGCharacter("Luke");
-
+    public void createCharacter(String name){
+        Character character = new Character(name);
+        characterDao.createCharacter(character.getName(), character.getHealth(),character.isAlive(), character.getLevel());
     }
+
     public RPGCharacter healCharacter(String name, int medication){
         RPGCharacter character = characterDao.getCharacter(name);
         Integer newHealth = character.getHealth() + medication;
