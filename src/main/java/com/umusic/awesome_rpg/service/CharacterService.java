@@ -11,8 +11,8 @@ public class CharacterService {
     @Autowired
     private CharacterDao characterDao;
 
-    public void createCharacter(){
-        Character character = new Character("Luke");
+    public void createCharacter(String name){
+        Character character = new Character(name);
         characterDao.createCharacter(character.getName(), character.getHealth(),character.isAlive(), character.getLevel());
     }
 
