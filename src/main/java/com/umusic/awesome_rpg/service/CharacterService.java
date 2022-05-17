@@ -32,6 +32,12 @@ public class CharacterService {
     }
 
     public String attackCharacter(String attackerName, String defenderName){
+        String info;
+        if (attackerName.equals(defenderName)) {
+            info = "A player cannot attack themselves! No self harm allowed.";
+            return info;
+        }
+
         Integer attackDamage = ThreadLocalRandom.current().nextInt(100, 200 + 1);
         RPGCharacter character = characterDao.getCharacter(defenderName);
 
@@ -39,12 +45,12 @@ public class CharacterService {
 
         characterDao.updateCharHealth(defenderName, newHealth, newHealth > 0);
 
-        String info;
         if (newHealth > 0) {
             info = "Character " + attackerName + " hit  " + defenderName + " for " + attackDamage + " damage. " + defenderName + " now has " + newHealth + " HP";
-        } else{
+        } else {
             info = "Character " + defenderName + " IS DEAD!!!!!!!";
         }
+
         return info;
     }
 
