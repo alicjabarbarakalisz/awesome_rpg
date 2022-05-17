@@ -21,7 +21,7 @@ public class CharacterService {
     public String healCharacter(String name, int medication){
         RPGCharacter character = characterDao.getCharacter(name);
         Integer newHealth = character.getHealth() + medication;
-        if(!character.isAlive() && newHealth > 999){
+        if(!character.isAlive() || newHealth > 999){
             return "Character must be alive and it's health can't be greater than 1000";
         }
         characterDao.updateCharHealth(name, newHealth, true);

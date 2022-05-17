@@ -31,7 +31,7 @@ public class CharacterController {
 
 
     @PostMapping("/heal/{name}/{medication}")
-    public ResponseEntity<String> healCharacter(@RequestParam(name = "name") String name, @RequestParam (name="medication") int medication){
+    public ResponseEntity<String> healCharacter(@PathVariable String name, @PathVariable int medication){
         return new ResponseEntity<String>(characterService.healCharacter(name,medication), HttpStatus.OK);
     }
 
