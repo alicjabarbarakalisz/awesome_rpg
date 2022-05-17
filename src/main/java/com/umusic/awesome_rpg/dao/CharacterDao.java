@@ -28,9 +28,9 @@ public class CharacterDao {
     }
 
 
-    public void updateCharHealth(String name, Integer newHealth){
-        jdbcTemplate.update("UPDATE rpg.rpg_character set health = ? WHERE name = ?",
-                newHealth, name
+    public void updateCharHealth(String name, Integer newHealth, boolean alive){
+        jdbcTemplate.update("UPDATE rpg.rpg_character set health = ?, alive = ? WHERE name = ?",
+                newHealth, alive, name
         );
     }
 }

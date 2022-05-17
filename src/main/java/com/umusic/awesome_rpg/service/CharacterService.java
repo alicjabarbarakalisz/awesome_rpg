@@ -24,7 +24,7 @@ public class CharacterService {
         if(!character.isAlive() && newHealth > 999){
             return character;
         }
-        characterDao.updateCharHealth(name, newHealth);
+        characterDao.updateCharHealth(name, newHealth, true);
 
         return character;
     }
@@ -35,9 +35,19 @@ public class CharacterService {
 
         Integer newHealth = character.getHealth() - attackDamage;
 
-        characterDao.updateCharHealth(name, newHealth);
+        boolean charAlive = true;
+        if (newHealth < 0) {
+            charAlive = false;
+        }
+        characterDao.updateCharHealth(name, newHealth, charAlive);
 
-        String info = "Character " + name + " hit for " + attackDamage + " damage. " + name + " now has " + newHealth + " HP";
+
+        String info;
+        if (charAlive) {
+            info = "Character " + name + " hit for " + attackDamage + " damage. " + name + " now has " + newHealth + " HP";
+        } {
+            info = "Character " + name + " IS DEAD!!!!!!!";
+        }
         return info;
     }
 
