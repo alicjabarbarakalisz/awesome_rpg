@@ -1,5 +1,5 @@
 CREATE TABLE rpg_character (
-    name string,
+    name varchar,
     health number,
     alive boolean,
     level number
