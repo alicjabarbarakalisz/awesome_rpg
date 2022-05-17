@@ -1,0 +1,15 @@
+version: '3.4'
+
+services:
+  mysql:
+    container_name: rpg-sql
+    image: mysql:5.7.24
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: 01Music
+      MYSQL_DATABASE: rpg
+      MYSQL_USER: rpg
+      MYSQL_PASSWORD: rpg
+    ports:
+      - "3600:3306"
+
