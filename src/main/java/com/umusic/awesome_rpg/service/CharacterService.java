@@ -31,19 +31,19 @@ public class CharacterService {
         return info;
     }
 
-    public String attackCharacter(String name){
+    public String attackCharacter(String attackerName, String defenderName){
         Integer attackDamage = ThreadLocalRandom.current().nextInt(100, 200 + 1);
-        RPGCharacter character = characterDao.getCharacter(name);
+        RPGCharacter character = characterDao.getCharacter(defenderName);
 
         Integer newHealth = character.getHealth() - attackDamage;
 
-        characterDao.updateCharHealth(name, newHealth, newHealth < 0);
+        characterDao.updateCharHealth(defenderName, newHealth, newHealth > 0);
 
         String info;
-        if (newHealth < 0) {
-            info = "Character " + name + " hit for " + attackDamage + " damage. " + name + " now has " + newHealth + " HP";
-        } {
-            info = "Character " + name + " IS DEAD!!!!!!!";
+        if (newHealth > 0) {
+            info = "Character " + attackerName + " hit  " + defenderName + " for " + attackDamage + " damage. " + defenderName + " now has " + newHealth + " HP";
+        } else{
+            info = "Character " + defenderName + " IS DEAD!!!!!!!";
         }
         return info;
     }

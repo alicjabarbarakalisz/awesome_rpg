@@ -24,9 +24,9 @@ public class CharacterController {
     }
 
 
-    @PostMapping("/attack/{name}")
-    public ResponseEntity<String> attack(@PathVariable String name){
-       return new ResponseEntity<String>(characterService.attackCharacter(name), HttpStatus.OK);
+    @PostMapping("/attack/{attackerName}/{defenderName}")
+    public ResponseEntity<String> attack(@PathVariable String attackerName, @PathVariable String defenderName){
+       return new ResponseEntity<String>(characterService.attackCharacter(attackerName, defenderName), HttpStatus.OK);
     }
 
 
