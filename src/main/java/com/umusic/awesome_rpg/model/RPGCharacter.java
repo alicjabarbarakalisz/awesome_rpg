@@ -1,6 +1,8 @@
 package com.umusic.awesome_rpg.model;
 
-public class Character {
+public class RPGCharacter {
+
+    private int id;
 
     private String name;
 
@@ -10,7 +12,7 @@ public class Character {
 
     private boolean alive = true;
 
-    public Character(String name) {
+    public RPGCharacter(String name) {
         this.name = name;
     }
 
@@ -45,5 +47,13 @@ public class Character {
 
     public void setAlive(boolean alive) {
         this.alive = alive;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }
