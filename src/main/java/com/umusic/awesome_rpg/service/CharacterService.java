@@ -35,15 +35,11 @@ public class CharacterService {
 
         Integer newHealth = character.getHealth() - attackDamage;
 
-        boolean charAlive = true;
-        if (newHealth < 0) {
-            charAlive = false;
-        }
-        characterDao.updateCharHealth(name, newHealth, charAlive);
+        characterDao.updateCharHealth(name, newHealth, newHealth < 0);
 
 
         String info;
-        if (charAlive) {
+        if (newHealth < 0) {
             info = "Character " + name + " hit for " + attackDamage + " damage. " + name + " now has " + newHealth + " HP";
         } {
             info = "Character " + name + " IS DEAD!!!!!!!";
