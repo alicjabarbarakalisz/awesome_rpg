@@ -18,20 +18,25 @@ public class CharacterController {
     private CharacterService characterService;
 
     @PostMapping("/create/{name}")
-    public ResponseEntity<HttpEntity> createCharacter(@PathVariable String name){
-        characterService.createCharacter(name);
-        return null;
+    public ResponseEntity<String> createCharacter(@PathVariable String name){
+        return new ResponseEntity<String>(characterService.createCharacter(name), HttpStatus.OK);
+    }
+
+    @PostMapping("/lookAround/{name}")
+    public ResponseEntity<String> lookAround(@PathVariable String name){
+        return new ResponseEntity<String>(characterService.lookAround(name), HttpStatus.OK);
     }
 
 
-    @PostMapping("/attack/{name}")
-    public ResponseEntity<String> attack(@PathVariable String name){
-       return new ResponseEntity<String>(characterService.attackCharacter(name), HttpStatus.OK);
+
+    @PostMapping("/attack/{attackerName}/{defenderName}")
+    public ResponseEntity<String> attack(@PathVariable String attackerName, @PathVariable String defenderName){
+       return new ResponseEntity<String>(characterService.attackCharacter(attackerName, defenderName), HttpStatus.OK);
     }
 
 
     @PostMapping("/heal/{name}/{medication}")
-    public ResponseEntity<String> healCharacter(@RequestParam(name = "name") String name, @RequestParam (name="medication") int medication){
+    public ResponseEntity<String> healCharacter(@PathVariable String name, @PathVariable int medication){
         return new ResponseEntity<String>(characterService.healCharacter(name,medication), HttpStatus.OK);
     }
 
