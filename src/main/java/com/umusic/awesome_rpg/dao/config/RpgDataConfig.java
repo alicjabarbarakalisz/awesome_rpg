@@ -23,10 +23,10 @@ public class RpgDataConfig {
     @Bean(name = "rpgDataSource")
     public DataSource rpgDataSource() {
         return DataSourceBuilder.create()
-                .url(dataSourceProperties().getUrl())
-                .username(dataSourceProperties().getUsername())
-                .password(dataSourceProperties().getPassword())
-                .driverClassName(dataSourceProperties().getDriverClassName())
+                .url("jdbc:mysql://localhost:3306")
+                .username("rpg")
+                .password("rpg")
+                .driverClassName("com.mysql.jdbc.Driver")
                 .build();
     }
 
