@@ -2,8 +2,6 @@ package com.umusic.awesome_rpg.model;
 
 public class Character {
 
-    private Integer id;
-
     private String name;
 
     private Integer health = 1000;
@@ -12,18 +10,10 @@ public class Character {
 
     private boolean alive = true;
 
-    public Character(Integer id, String name) {
-        this.id = id;
+    public Character(String name) {
         this.name = name;
     }
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;
