@@ -10,8 +10,11 @@ import java.util.concurrent.ThreadLocalRandom;
 @Service
 public class CharacterService {
 
-    @Autowired
     private CharacterDao characterDao;
+
+    public CharacterService(CharacterDao characterDao) {
+        this.characterDao = characterDao;
+    }
 
     public void createCharacter(String name){
         RPGCharacter character = new RPGCharacter(name);
@@ -21,7 +24,7 @@ public class CharacterService {
     public String healCharacter(String name, int medication){
         RPGCharacter character = characterDao.getCharacter(name);
         Integer newHealth = character.getHealth() + medication;
-        if(!character.isAlive() && newHealth > 999){
+        if(!character.isAlive() || newHealth > 999){
             return "Character must be alive and it's health can't be greater than 1000";
         }
         characterDao.updateCharHealth(name, newHealth, true);
@@ -32,7 +35,7 @@ public class CharacterService {
     }
 
     public String attackCharacter(String name){
-        Integer attackDamage = ThreadLocalRandom.current().nextInt(100, 200 + 1);
+        Integer attackDamage = 100;
         RPGCharacter character = characterDao.getCharacter(name);
 
         Integer newHealth = character.getHealth() - attackDamage;
