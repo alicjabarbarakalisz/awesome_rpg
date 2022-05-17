@@ -18,7 +18,7 @@ public class CharacterDao {
     }
 
     public RPGCharacter getCharacter(String name){
-        return jdbcTemplate.queryForObject("SELECT * FROM rpg.rpg_character WHERE name = :?", new Object[]{name}, (rs, rowNum) ->
+        return jdbcTemplate.queryForObject("SELECT * FROM rpg.rpg_character WHERE name = ?", new Object[]{name}, (rs, rowNum) ->
                 new RPGCharacter(
                         rs.getString("name"),
                         rs.getInt("health"),
@@ -29,6 +29,8 @@ public class CharacterDao {
 
 
     public void updateCharHealth(String name, Integer newHealth){
-        jdbcTemplate.execute("UPDATE CHARACTER SET HEALTH = " + newHealth + " where name = " + name);
+        jdbcTemplate.update("UPDATE rpg.rpg_character set health = ? WHERE name = ?",
+                newHealth, name
+        );
     }
 }
