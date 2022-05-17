@@ -12,6 +12,13 @@ public class RPGCharacter {
 
     private boolean alive = true;
 
+    public RPGCharacter(String name, Integer health, Integer level, boolean alive) {
+        this.name = name;
+        this.health = health;
+        this.level = level;
+        this.alive = alive;
+    }
+
     public RPGCharacter(String name) {
         this.name = name;
     }

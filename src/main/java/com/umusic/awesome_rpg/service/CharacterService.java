@@ -5,6 +5,8 @@ import com.umusic.awesome_rpg.model.RPGCharacter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 @Service
 public class CharacterService {
 
@@ -27,5 +29,13 @@ public class CharacterService {
 
         return character;
     }
+
+    public void attackCharacter(String name){
+        Integer attackDamage = ThreadLocalRandom.current().nextInt(100, 200 + 1);
+        characterDao.get
+
+        characterDao.attack(name, damage);
+    }
+
 
 }
