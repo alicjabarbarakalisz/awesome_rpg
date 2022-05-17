@@ -12,7 +12,7 @@ public class CharacterService {
     private CharacterDao characterDao;
 
     public void createCharacter(String name){
-        Character character = new Character(name);
+        RPGCharacter character = new RPGCharacter(name);
         characterDao.createCharacter(character.getName(), character.getHealth(),character.isAlive(), character.getLevel());
     }
 
