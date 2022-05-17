@@ -10,4 +10,6 @@ public class AwesomeRpgApplication {
         SpringApplication.run(AwesomeRpgApplication.class, args);
     }
 
+    // Test
+
 }
