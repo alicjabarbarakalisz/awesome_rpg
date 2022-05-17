@@ -25,29 +25,65 @@ public class CharacterServiceTest {
 
     @Test
     public void attackCharacterKillTest(){
-        RPGCharacter character = new RPGCharacter("Saturninus");
-        character.setAlive(true);
-        character.setHealth(50);
-        character.setLevel(3);
+        RPGCharacter attacker = new RPGCharacter("Saturninus");
+        RPGCharacter defender = new RPGCharacter("Plutonium");
+        attacker.setAlive(true);
+        attacker.setHealth(50);
+        attacker.setLevel(8);
 
-        when(characterDao.getCharacter("Saturninus")).thenReturn(character);
-        String response = service.attackCharacter("Saturninus");
+        defender.setAlive(true);
+        defender.setHealth(50);
+        defender.setLevel(2);
 
-        assertEquals("Character Saturninus IS DEAD!!!!!!!", response);
+        when(characterDao.getCharacter("Saturninus")).thenReturn(attacker);
+        when(characterDao.getCharacter("Plutonium")).thenReturn(defender);
+
+        String response = service.attackCharacter("Saturninus", "Plutonium");
+
+        assertEquals("Character Plutonium IS DEAD!!!!!!!", response);
 
     }
 
     @Test
-    public void attackCharacterTest(){
-        RPGCharacter character = new RPGCharacter("Saturninus");
-        character.setAlive(true);
-        character.setHealth(500);
-        character.setLevel(3);
+    public void attackCharacterNotDeadTest(){
+        RPGCharacter attacker = new RPGCharacter("Saturninus");
+        RPGCharacter defender = new RPGCharacter("Plutonium");
+        attacker.setAlive(true);
+        attacker.setHealth(400);
+        attacker.setLevel(4);
 
-        when(characterDao.getCharacter("Saturninus")).thenReturn(character);
-        String response = service.attackCharacter("Saturninus");
+        defender.setAlive(true);
+        defender.setHealth(300);
+        defender.setLevel(2);
 
-        assertEquals("Character Saturninus IS DEAD!!!!!!!", response);
+        when(characterDao.getCharacter("Saturninus")).thenReturn(attacker);
+        when(characterDao.getCharacter("Plutonium")).thenReturn(defender);
+
+        String response = service.attackCharacter("Saturninus", "Plutonium");
+
+        assertEquals("Character Saturninus hit Plutonium for 100 damage. Plutonium now has 200 HP", response);
+
+    }
+
+
+    @Test
+    public void attackCharacterNotDeadDifLevelsTest(){
+        RPGCharacter attacker = new RPGCharacter("Saturninus");
+        RPGCharacter defender = new RPGCharacter("Plutonium");
+        attacker.setAlive(true);
+        attacker.setHealth(400);
+        attacker.setLevel(13);
+
+        defender.setAlive(true);
+        defender.setHealth(300);
+        defender.setLevel(2);
+
+        when(characterDao.getCharacter("Saturninus")).thenReturn(attacker);
+        when(characterDao.getCharacter("Plutonium")).thenReturn(defender);
+
+        String response = service.attackCharacter("Saturninus", "Plutonium");
+
+        assertEquals("Character Saturninus hit Plutonium for 150 damage. Plutonium now has 150 HP", response);
 
     }
 
